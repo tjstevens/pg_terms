@@ -1,4 +1,5 @@
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/project.db")
+require 'data_mapper'
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://#{Dir.pwd}/project.db')
 class Responses
     include DataMapper::Resource
     property :id,             Serial

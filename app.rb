@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
 require File.dirname(__FILE__) + '/models.rb'
-#require 'dm-sqlite-adapter'
+require 'dm-sqlite-adapter'
 require 'dm-postgres-adapter'
 
 enable :sessions
@@ -11,13 +11,15 @@ get '/' do
     @community = params[:community]
     
     @result = Responses.first(:url => @community)
-    if @result.complete == true
-        #"redirecting to " + @community
-        redirect @community
-    elsif @result.complete == false
-        erb :terms
+    if not @result.nil?
+        if @result.complete == true
+            #"redirecting to " + @community
+            redirect @community
+        else
+            erb :terms
+        end
     else
-        @result.create(:url => @community, :complete => false)
+        @result = Responses.create(:url => @community, :complete => false)
         @result.save
         #STDERR.puts @result.errors.inspect
         erb :terms

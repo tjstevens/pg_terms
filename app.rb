@@ -3,7 +3,7 @@ require 'sinatra'
 require 'data_mapper'
 require File.dirname(__FILE__) + '/models.rb'
 #require 'dm-sqlite-adapter'
-require 'dm-postgres-adapter'
+#require 'dm-postgres-adapter'
 
 enable :sessions
 

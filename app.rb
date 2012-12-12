@@ -14,14 +14,10 @@ get '/' do
 
     # If we find one, we know they previously accepted the T&Cs so send them along otherwise send them to the T&Cs page
 	# ... also, we want to check that they have accepted the current version of the terms
-    if params[:v]
-	    if @cookie == @community + params[:v]
-    	    redirect @community
-    	else
-			erb :terms
-    	end
-    else
-    	erb :terms
+    if @cookie == @community + currentVersion
+   	    redirect @community
+   	else
+		erb :terms
     end
 end
 

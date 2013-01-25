@@ -1,5 +1,8 @@
 #require 'rubygems'
 require 'sinatra'
+require 'erb'
+
+include ERB::Util
 
 #enable :sessions
 
@@ -8,6 +11,7 @@ currentVersion = "2"
 get '/' do
     # Grab community URL from inbound request so we can pass it to the view
     @community = params[:community]
+    @token = @community.split('?',2)
 
     # See if there is a covergirl cookie in the browser
     @cookie = request.cookies["covergirl"]
